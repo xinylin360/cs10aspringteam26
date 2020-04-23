@@ -3,19 +3,19 @@ from random import choice
 computerResponses = [] # list of all computer's questions
 humanResponses = []  # list of all the person's responses
 
-def eliza():
+def relationship_wellheard():
     """
         simulate a listner for relationship stress and problems
         this function asks the user questions
         based on the answer to the previous question
     """
-    userComment = input("Computer >> My name is Eliza and I am here to listen to your relationship stress and problems. What is happening right now? \nThe User >> ")
+    userComment = input("Computer >> My name is relationship wellheard and I am here to listen to your relationship stress and problems. What is happening right now? \nThe User >> ")
 
     while userComment not in ["goodbye","bye","quit","exit"]:
         humanResponses.append(userComment)
         response = respond(userComment)
         if response in computerResponses:
-            response = "Once again, "+response
+            response = "Again, "+response
         computerResponses.append(response)
         print("Computer >> "+response)
         userComment = input("The User >> ")
@@ -68,7 +68,7 @@ singleResponses=[
 
 
 # Here are the keywords and response to comments containing a potential problem or breakup with a partner keyword
-problemWords = "mad angry upset hate anger angry why problem fight sad breakup cheat cry hurt heartbreak broken abuse violent yell scream selfish argue trust issue cold".split()
+problemWords = "mad angry upset hate anger angry why problem fight sad breakup cheat cry hurt heartbreak broken abuse violent yell scream selfish argue trust issue cold conflic".split()
 problemResponses = [
   "calm down...",
   "what about the good times you guys had?",
@@ -85,7 +85,7 @@ problemResponses = [
 # these are the possible responses to comments like "nothing, good, ok, okay, why, what"
 nothingResponses = [
     "it seems like you are fine, feel free to enter 'bye' to exit our chat",
-    "fine, tell us other things you would like to talk about",
+    "tell me other things you would like to talk about",
     "what are other ways you would like to get help from me?",
     "if you are still feeling down, feel free to tell me more",
     "sorry I can't solve your problems, I am only here to listen",
@@ -94,11 +94,20 @@ nothingResponses = [
     "Would you mind elaborating?",
     "What else?",
     "Anything more to say?",
-    "Don't hold back on the words, THINK MORE!",
+    "everything will be okay soon",
     "Tell me more cutie",
-    "Fine. Tell me more about your feelings right now",
+    "Tell me more about your feelings right now",
     "I can't help you unless you tell me more!",
-    "WHY ARE YOU BEING SO SHORT WITH ME!!!!"
+    "what do you mean?",
+    "why?",
+    "I am not sure I understand",
+    "really? how?",
+    "what are your way of coping?",
+    "im sorry",
+    "how can I help?",
+    "how can I do better?",
+    "what do you plan to do now?"
+    
 ]
 
 
@@ -121,5 +130,5 @@ generalResponses = [
 
 
 if __name__=="__main__":
-    eliza()  # call eliza when run as a script
+    relationship_wellheard()  # call wellheard when run as a script
              # but not when imported
