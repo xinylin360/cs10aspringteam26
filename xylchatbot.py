@@ -11,24 +11,56 @@ def relationship_wellheard():
     """
     userComment = input("Computer >> My name is relationship wellheard and I am here to listen to your relationship stress and problems. What is happening right now? \nThe User >> ")
 
+    flag = False
     while userComment not in ["goodbye","bye","quit","exit"]:
         humanResponses.append(userComment)
-        response = respond(userComment)
-        if response in computerResponses:
-            response = "Again, "+response
-        computerResponses.append(response)
-        print("Computer >> "+response)
+
+        if not flag:
+            flag = True
+            suicidal_attempt()
+        else:
+            response = respond(userComment)
+            if response in computerResponses:
+                response = "Again, "+response
+            computerResponses.append(response)
+            print("Computer >> "+response)
+
         userComment = input("The User >> ")
+
     print("bye")
+
+def suicidal_attempt():
+    userComment = input("Computer >> Do you have a suicidal tendency? \nThe User >> ")
+    comments = userComment.lower().split()
+    if 'yes' in comments:
+        for response in hotline:
+            print("Computer >> "+response)
+    else:
+        userComment = input("Computer >> Have you attempted to harm yourself? \nThe User >> ")
+        comments = userComment.lower().split()
+        if 'yes' in comments:
+            for response in counsel:
+                print("Computer >> "+response)
+
+    response = 'Sincerely hope it could help you.'
+    print("Computer >> "+response)
+
 
 def respond(comment):
     """ generate a computer response to the user's comment"""
-    if contains(comment,singleWords):
-        return choice(singleResponses)
-    if contains(comment,problemWords):
-        return choice(problemResponses)
+    wordsInSentence = contains(comment,singleWords)
+    if len(wordsInSentence) >= 1:
+        string = "you said you are feeling " + wordsInSentence[0] + '\n' 
+        return string + choice(singleResponses)
+
+    wordsInSentence = contains(comment,problemWords)
+    if len(wordsInSentence) >= 1:
+        string = "you said you are feeling " + wordsInSentence[0] + '\n' 
+        return string + choice(singleResponses)
+
     if len(comment.split()) <= 7:  # respond to short answers...
         return choice(nothingResponses)
+
     return choice(generalResponses)
 
 def contains(sentence,words):
@@ -37,7 +69,7 @@ def contains(sentence,words):
         words is a list of strings
     """
     wordsInSentence = [word for word in words if word in sentence]
-    return len(wordsInSentence) >= 1
+    return wordsInSentence
 
 def contains2(sentence,words):
     """
@@ -59,10 +91,10 @@ singleResponses=[
 "Do you want to be single?",
 "Do you want to find new partners or dates?",
 "What is your ideal partner like?",
-    "Do you want some love from me?",
-    "are you satisfied with your current state?",
-    "cheer up cutie!",
-    "if no one wants you, I do!"
+"Do you want some love from me?",
+"are you satisfied with your current state?",
+"cheer up cutie!",
+"if no one wants you, I do!",
     
 ]
 
@@ -79,7 +111,7 @@ problemResponses = [
   "How are you and your partner communicating?",
   "what ways can your communication with each other be better?",
   "How does your partner usually treat you?",
-    "no worries, I got your back!"
+  "no worries, I got your back!"
 ]
 
 # these are the possible responses to comments like "nothing, good, ok, okay, why, what"
@@ -128,7 +160,27 @@ generalResponses = [
   "Do you want to get this problem solved or are you just seeking for a listener?"
 ]
 
+hotline = [
+    'If you think someone might be suicidal, ask them directly "Are you thinking about suicide?"',
+    'Don’t be afraid to do this, it shows you care and will actually decrease their risk because it shows someone is willing to talk about it.',
+    'Make sure you ask directly and unambiguously.',
+    'National Suicide Prevention Lifeline Call 1-800-273-8255 Available 24 hours everyday',
+    'https://www.dadabhagwan.org/path-to-happiness/self-help/suicide-prevention/what-happens-after-suicide',
+]
+counsel = [
+    'The Brandeis Counseling Center (BCC) provides counseling for students in times of stress and encourages them to ask for help with their most immediate concerns.',
+    'The BCC is available to provide urgent consultations by phone 24 hours a day.',
+    'Psychotherapy groups are suspended until further notice.',
+    'Teletherapy appointments are available to students who are in treatment with the BCC, and are residing within Massachusetts.',
+    'If you are seeking routine care, or a referral in your local area, please contact us at the above phone number. We will recommend individualized resources and referrals.',
+    'https://www.brandeis.edu/counseling/',
+    'https://www.brandeis.edu/romance-studies/pdfs/counseling-center-information.pdf'
+]
+
 
 if __name__=="__main__":
     relationship_wellheard()  # call wellheard when run as a script
              # but not when imported
+
+
+
